@@ -99,12 +99,11 @@ void Interface::writeToFile(Array<Student> & arr){
 
 void Interface::add(Array<Student> & arr){
 	Student node;
-	char inic[5];
+	std::string inic;
 	cout << "¬ведите фамилю и инициалы студента: ";
 	cin >> node.name >> inic;
 
-	strcat_s(node.name, " ");
-	strcat_s(node.name, inic);
+	node.name +=  " " + inic;
 
 	cout << "¬ведите группу студента: "; cin>>node.group;
 	cout << "¬ведите дату рождени€ студента в формате дд.мм.гггг: "; cin >> node.birthday;
@@ -124,26 +123,3 @@ void Interface::del(Array<Student>& arr){
 	if (ans == 'д') arr.earase(id);
 };
 
-Array<Student> FindStudents(Array<Student> &students) {
-	bool added[30] = { false };
-	Array<Student> result;
-	for (size_t i = 1; i < students.size; i++) {
-		if (added[i])
-			continue;
-
-		for (size_t j = i + 1 ; j < students.size; j++) {
-			if (!students[i].birthday.isEqual(students[j].birthday, eqMounth | eqYear))
-				continue;
-
-			if (!added[i]) {
-				result.insert(students[i]);
-				added[i] = true;
-			}
-			if (!added[j]) {
-				result.insert(students[j]);
-				added[j] = true;
-			}
-		};
-	};
-	return result;
-}

@@ -2,20 +2,9 @@
 #include<Windows.h>
 #include <cstdlib>
 #include "Interface.h"
-
+#include "algo.h"
 using namespace std;
 
-
-//Сортировка пузырьком на шаблонах.
-template<typename T, typename Compare>
-void sort(T  &arr, Compare cmp) {
-	for (int i = arr.size; i > 0; i--)
-		for (int j = 1; j < i; j++)
-			if (cmp(arr[j], arr[j + 1]))
-				swap(arr[j], arr[j + 1]);
-
-	cout << "Записи отсортированы!" << endl;
-};
 
 bool ByDay(Student &a, Student &b) {
 	return a.birthday.day < b.birthday.day;
@@ -33,7 +22,7 @@ int main() {
 	SetConsoleOutputCP(1251);
 	Interface UI;
 	Array<Student> inArr, outArr;
-
+	Array<BirthdaySeason> season;
 	while (true){
 		system("cls");
 		int key = UI.menu();
@@ -59,12 +48,16 @@ int main() {
 			UI.printTable(outArr); break;
 		case 10:
 			sort(outArr, [](Student &a, Student &b) { //Лямба-функция
-				return a.birthday.getHash() > a.birthday.getHash() || strcmp(a.name, b.name) > 0;
+				return a.birthday.year > b.birthday.year ? true :
+					a.birthday.year == b.birthday.year && a.birthday.mounth > b.birthday.mounth ? true :
+					a.birthday.mounth == b.birthday.mounth && a.name > b.name ? true : false;
 			});
 			break;
 		case 11:
 			UI.writeToFile(outArr); break;
 		case 12:
+			season = getBirtdaySeasons(inArr); break;
+		case 13:
 			exit(0);
 
 		default:

@@ -16,10 +16,9 @@ std::ostream & operator<<(std::ostream & out, Date & date) {
 }
 
 std::istream& operator>>(std::istream &in, Student &student) {
-	char inic[5];
+	std::string inic;
 	in >> student.name >> inic >> student.group >> student.birthday;
-	strcat_s(student.name, " ");
-	strcat_s(student.name, inic);
+	student.name += " " + inic;
 	return in;
 };
 
