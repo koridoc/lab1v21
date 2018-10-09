@@ -9,22 +9,29 @@
 
 const int headerTableLen = 5;
 const int maxStrLen = 100;
-const int maxTextMenuLen = 20;
-
+const int maxTextMenuLen = 25;
+const int headerTableListLen = 4;
 
 using namespace std;
 
 struct Interface{
 	char headerTable[headerTableLen][maxStrLen],
-			textMenu[maxTextMenuLen][maxStrLen];
+			textMenu[maxTextMenuLen][maxStrLen],
+			headerTableList[headerTableListLen][maxStrLen];
 	int lenMenu;
 	Interface();
 
 	void loadFromFile(Array<Student> &arr);
 	void printHeaderTable(ostream &out);
+
+	void printHeaderTableList(ostream &out);
+	void printTableList(Array<BirthdaySeason> &seasons, ostream & out = cout);
+
 	void printTable(Array<Student> &arr, ostream & out = cout);
 	void printTable(Student student, int id, ostream & out = cout);
+
 	void writeToFile(Array<Student> &arr);
+	void writeToFile(Array<BirthdaySeason> &seasons);
 	void add(Array<Student> &arr);
 	void del(Array<Student> &arr);
 	int menu();
@@ -32,7 +39,12 @@ struct Interface{
 
 Interface::Interface(){
 	ifstream fHeader("header.txt");
+	ifstream fHeaderList("headerList.txt");
 	ifstream fMenu("textmenu.txt");
+
+	for (size_t i = 0; i<headerTableListLen; i++) {
+		fHeaderList.getline(headerTableList[i], maxStrLen);
+	}
 	for (size_t i = 0;i<headerTableLen; i++){
 		fHeader.getline(headerTable[i], maxStrLen);
 	}
@@ -46,7 +58,8 @@ inline int Interface::menu(){
 	for (size_t i = 3; i < lenMenu; i++) {
 		cout << textMenu[i] << endl;
 	}
-	cout << textMenu[0]; cin >> res;
+	cout << textMenu[0];
+	cin >> res;
 	return res;
 }
 
@@ -74,6 +87,19 @@ void Interface::printHeaderTable(ostream & out){
 		out << headerTable[i] << endl;
 	}
 };
+void Interface::printHeaderTableList(ostream &out) {
+	for (size_t i = 0; i<4; i++) {
+		out << headerTableList[i] << endl;
+	}
+}
+
+void Interface::printTableList(Array<BirthdaySeason> &seasons, ostream & out) {
+	printHeaderTableList(out);
+	for (size_t i = 1; i <= seasons.size; i++) {
+		out << "|" << setw(10) << seasons[i].season << " |" <<setw(11)<< seasons[i].count << " |\n";
+	}
+	out << headerTableList[0] << endl;
+}
 
 void Interface::printTable(Array<Student> &arr, ostream & out) {
 	printHeaderTable(out);
@@ -94,6 +120,14 @@ void Interface::writeToFile(Array<Student> & arr){
 	cout << "Введите имя файла: "; cin >> fileName;
 	ofstream file(fileName);
 	this->printTable(arr, file);
+	cout << "Файл записан!" << endl;
+}
+
+void Interface::writeToFile(Array<BirthdaySeason> &seasons) {
+	string fileName;
+	cout << "Введите имя файла: "; cin >> fileName;
+	ofstream file(fileName);
+	this->printTableList(seasons, file);
 	cout << "Файл записан!" << endl;
 }
 

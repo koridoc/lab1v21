@@ -16,13 +16,12 @@ struct ByBirthday{
 }byBirthday;
 
 
-
 int main() {
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 	Interface UI;
 	Array<Student> inArr, outArr;
-	Array<BirthdaySeason> season;
+	Array<BirthdaySeason> seasons;
 	while (true){
 		system("cls");
 		int key = UI.menu();
@@ -56,8 +55,23 @@ int main() {
 		case 11:
 			UI.writeToFile(outArr); break;
 		case 12:
-			season = getBirtdaySeasons(inArr); break;
+			seasons = getBirtdaySeasons(inArr); break;
+
 		case 13:
+			UI.printTableList(seasons); break;
+		case 14:
+			sort(seasons, [](BirthdaySeason &a, BirthdaySeason &b) {
+				return a.season > b.season;
+			});
+			break;
+		case 15:
+			sort(seasons, [](BirthdaySeason &a, BirthdaySeason &b) {
+				return a.count < b.count;
+			});
+			break;
+		case 16:
+			UI.writeToFile(seasons); break;
+		case 17:
 			exit(0);
 
 		default:
