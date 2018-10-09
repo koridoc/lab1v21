@@ -32,13 +32,13 @@ struct Student {
 };
 
 struct BirthdaySeason{
-	std::string season;
+	int season;
 	int count;
-	BirthdaySeason(std::string season) :season(season) {
+	BirthdaySeason(int season) :season(season) {
 		this->count = 0;
 	};
 	BirthdaySeason() {
-		season = "";
+		season = -1;
 		count = 0;
 	}
 };

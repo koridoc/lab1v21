@@ -38,7 +38,7 @@ Array<Student> FindStudents(Array<Student> &students) {
 	return result;
 }
 
-int getIdSeason(Array<BirthdaySeason> &Seasons, std::string season) {
+int getIdSeason(Array<BirthdaySeason> &Seasons, int season) {
 	for (size_t i = 1; i <= Seasons.size; i++)
 		if (Seasons[i].season == season)
 			return i;
@@ -52,14 +52,11 @@ int getIdSeason(Array<BirthdaySeason> &Seasons, std::string season) {
 Array<BirthdaySeason> getBirtdaySeasons(Array<Student> &students) {
 	bool added[13] = { false };
 	int m = 0;
-	std::string nameSeasons[] = { "Зима", "Весна", "Лето", "Осень" };
 	Array<BirthdaySeason> result;
-
 	for (size_t i = 1; i < students.size; i++) {
 		m = students[i].birthday.mounth;
 		if (!added[m]) {
-			std::string nameSeason = nameSeasons[(m / 3) % 4];
-			int id = getIdSeason(result, nameSeason);
+			int id = getIdSeason(result, (m / 3) % 4);
 			result[id].count++;
 			added[m] = true;
 		}

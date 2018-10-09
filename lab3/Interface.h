@@ -95,8 +95,10 @@ void Interface::printHeaderTableList(ostream &out) {
 
 void Interface::printTableList(Array<BirthdaySeason> &seasons, ostream & out) {
 	printHeaderTableList(out);
+	std::string nameSeasons[] = { "Зима","Весна", "Лето", "Осень" };
+
 	for (size_t i = 1; i <= seasons.size; i++) {
-		out << "|" << setw(10) << seasons[i].season << " |" <<setw(11)<< seasons[i].count << " |\n";
+		out << "|" << setw(10) << nameSeasons[seasons[i].season] << " |" <<setw(11)<< seasons[i].count << " |\n";
 	}
 	out << headerTableList[0] << endl;
 }
