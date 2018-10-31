@@ -118,6 +118,8 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="UserStructs.cpp" />
     <ClCompile Include="UserStructs.h" />
+    <ClCompile Include="View.cpp" />
+    <ClCompile Include="View.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="algo.h" />

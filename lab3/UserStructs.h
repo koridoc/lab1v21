@@ -11,10 +11,10 @@ struct Date {
 		mounth,
 		year;
 
-	bool isEqual(Date date, size_t mask = 0xFFFFFFFF) {
+	bool isEqual(Date date, int mask = 0xFFFFFFFF) {
 		return (getHash() & mask) == (date.getHash() & mask);
 	};
-	int getHash(size_t mask = 0xFFFFFFFF) {
+	int getHash(int mask = 0xFFFFFFFF) {
 		return (day | (mounth << 8) | (year << 16) & mask);
 	};
 
