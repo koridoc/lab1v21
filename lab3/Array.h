@@ -7,12 +7,20 @@ struct Array{
 	T *data;
 
 	Array();
-	~Array();
+	Array(const Array<T> &arr);
+	~Array(){
+		if (data != nullptr)
+			delete[] data;
+	}
+	Array operator = (const Array<T> arr);
+
 	T& operator[](const int id);
 	int insert(T &node);
 	int earase(const int id);
 	void realloc(int newSize);
 	void clear();
+
+
 };
 
 template<typename T>
@@ -23,16 +31,29 @@ Array<T>::Array() {
 	this->realloc(capasity);
 }
 template<typename T>
-Array<T>::~Array(){
-	delete[] data;
+Array<T>::Array(const Array<T> &arr){
+	this->data = new T[arr.size];
+	this->size = arr.size;
+	for (size_t i = 0; i < size; i++)
+		this->data[i] = arr.data[i];
+
 }
+template<typename T>
+Array<T> Array<T>::operator=(Array<T> arr){
+	this->realloc(arr.size);
+	this->size = arr.size;
+	for (size_t i = 0; i < size; i++)
+		this->data[i] = arr.data[i];
+	return *this;
+}
+
 
 template<typename T>
 void Array<T>::realloc(int newCapasity){
 	T *newArray = new T[newCapasity];
 
 	for (int i = 0; i < min(this->size, newCapasity); i++)
-		newArray[i] = data[i];
+		newArray[i] = this->data[i];
 
 	if(this->data != nullptr)
 		delete[] this->data;

@@ -55,7 +55,7 @@ Interface::Interface(){
 
 inline int Interface::menu(){
 	int res;
-	for (size_t i = 3; i < lenMenu; i++) {
+	for (int i = 3; i < lenMenu; i++) {
 		cout << textMenu[i] << endl;
 	}
 	cout << textMenu[0];
