@@ -60,7 +60,10 @@ void ViewInterface::showMenu() {
 	default:
 		cout << "Такого пункта не существует. Попробуйте еще раз." << endl;
 	}
-	cout << cin.good();
+	if (!cin.good()) {
+		cin.clear();
+		cin.ignore(32767, '\n');
+	};
 	system("pause");
 
 }
