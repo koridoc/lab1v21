@@ -55,6 +55,8 @@ void ViewInterface::showMenu() {
 	case 16:
 		UI.writeToFile(seasons); break;
 	case 17:
+		UI.constructor(inArr); break;
+	case 18:
 		exit(0);
 
 	default:

@@ -31,12 +31,14 @@ inline Array<T>::Array() {
 template<typename T>
 inline Array<T>::Array(const Array<T> &arr){
 	this->size = arr.size;
+	this->capasity = arr.size;
 	for (int i = 0; i < size; i++)
 		this->data[i] = arr.data[i];
 }
 template<typename T>
 inline Array<T> Array<T>::operator=(Array<T> arr){
 	this->size = arr.size;
+	this->capasity = arr.size;
 	for (int i = 0; i < size; i++)
 		this->data[i] = arr.data[i];
 	return *this;

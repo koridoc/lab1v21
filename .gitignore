@@ -260,3 +260,5 @@ paket-files/
 __pycache__/
 *.pyc
 /lab3/2.txt
+*.docx
+/lab3/яяяяю.txt

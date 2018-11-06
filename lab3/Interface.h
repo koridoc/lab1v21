@@ -36,6 +36,7 @@ public:
 	void writeToFile(Array<BirthdaySeason> &seasons);
 	void add(Array<Student> &arr);
 	void del(Array<Student> &arr);
+	void constructor(Array<Student> &arr);
 	int menu();
 };
 
@@ -161,5 +162,9 @@ inline void Interface::del(Array<Student>& arr){
 	printTable(arr[id],id);
 	cout << "¬ы уверены, что нужно удалить запись? (д/н): "; cin >> ans;
 	if (ans == 'д') arr.earase(id);
+}
+inline void Interface::constructor(Array<Student>& arr){
+	Array<Student> tmp(arr);
+	this->printTable(tmp);
 };
 
