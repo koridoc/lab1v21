@@ -13,7 +13,7 @@ public:
 	~Array(){
 		size = 0;
 	}
-	Array operator = (const Array<T> arr);
+	Array operator = (const Array<T> &arr);
 
 	T& operator[](const int id);
 	int insert(T &node);
@@ -36,7 +36,10 @@ inline Array<T>::Array(const Array<T> &arr){
 		this->data[i] = arr.data[i];
 }
 template<typename T>
-inline Array<T> Array<T>::operator=(Array<T> arr){
+inline Array<T> Array<T>::operator=(const Array<T> &arr){
+	if (this == &arr)
+		return *this;
+
 	this->size = arr.size;
 	this->capasity = arr.size;
 	for (int i = 0; i < size; i++)
